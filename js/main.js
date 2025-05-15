@@ -124,10 +124,13 @@ const pintarBotones = () =>  {
     })
 }
 
+const pintarImagenGrande = () => {
 
+}
 
 
 
 
 
 pintarBotones();
+pintarImagenGrande();
