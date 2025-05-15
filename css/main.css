@@ -16,3 +16,14 @@
    width: 100%;
    height: 100%;
 }
+
+.flexBotones{
+    display: flex;
+    margin: 20px 0px 20px 50px;
+    /*justify-content: space-around;*/
+    gap: 10px;
+}
+
+.imgGrande{
+    
+}
