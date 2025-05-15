@@ -8,7 +8,7 @@
 
 .imgHeader{
     width: 100%;
-    height: 300px;
+    height: 350px;
     margin: 0 auto;
 }
 
@@ -25,5 +25,46 @@
 }
  
 .imgGrande{
-    
+    width: 80%;
+    margin: 0 auto;
+}
+
+.divImagen{
+    width: 100%;
+    height: 325px;
+
+}
+
+.imagenGrande{
+    width: 100%;
+    height: 100%;
+}
+
+.miniaturasTitulo{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.flexImgMiniaturas{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    /*margin: 20px 0px 20px 50px;*/
+    flex-wrap: wrap;
+    /*justify-content: space-between;*/
+    gap: 15px;
+}
+
+.imgMiniaturasTitulo{
+    text-align: center;
+}
+
+.divImgMosaicos{
+    width: 250px;
+    height: 200px;
+}
+
+.imgMosaico{
+    width: 100%;
+    height: 100%;
 }

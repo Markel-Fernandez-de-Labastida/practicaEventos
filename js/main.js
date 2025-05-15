@@ -125,12 +125,73 @@ const pintarBotones = () =>  {
 }
 
 const pintarImagenGrande = () => {
+    const divImgGrande = document.querySelector(".imgGrande");
+    const tituloImgGrande = document.querySelector(".imgGrandeTitulo");
+
+    const contenedorImagen = document.createElement("DIV");
+    const imagen = document.createElement("IMG");
+
+    contenedorImagen.classList.add("divImagen");
+    imagen.classList.add("imagenGrande");
+    imagen.setAttribute("src", arrViajes[0].srcImg);
+    tituloImgGrande.innerHTML = arrViajes[0].titulo;
+
+    contenedorImagen.append(imagen);
+    divImgGrande.append(tituloImgGrande, contenedorImagen);
 
 }
+const pintarTituloMosaicos = () => {
+    const titulo = document.querySelector(".miniaturasTitulo");
+    titulo.innerHTML = "Imagenes relacionadas";
+}
 
+/* const pintarMosaicos = () => {
+    arrViajes.forEach((valor, index, array) => {
+        if (index = 0) {
 
+        } else {
+            const contenedorMosaicos = document.querySelector("imgMiniaturas");
+            const tituloMosaicos = document.querySelector("imgMiniaturasTitulo");
+            
+            const divImagenMosaico = document.createElement("DIV");
+            const imgMosaico = document.createElement("IMG");
+
+            divImagenMosaico.classList.add("divImgMosaicos");
+            imgMosaico.classList.add("imgMosaico");
+            imgMosaico.setAttribute("src", valor[index].srcImg);
+            tituloMosaicos.innerHTML = valor[index].titulo;
+
+            divImagenMosaico.append(imgMosaico);
+            contenedorMosaicos.append(tituloMosaicos, divImagenMosaico)
+        }
+    })
+} */
 
 
 
 pintarBotones();
 pintarImagenGrande();
+pintarTituloMosaicos();
+
+    arrViajes.forEach((valor, index, array) => {
+        
+        const contenedorMosaicos = document.querySelector(".flexImgMiniaturas");
+        const tituloMosaicos = document.createElement("H3");
+        //console.log(contenedorMosaicos);
+        //console.log(tituloMosaicos);
+        const divMosaico = document.createElement("DIV");
+        const divImagenMosaico = document.createElement("DIV");
+        const imgMosaico = document.createElement("IMG");
+
+        tituloMosaicos.classList.add("imgMiniaturasTitulo");
+        divImagenMosaico.classList.add("divImgMosaicos");
+        imgMosaico.classList.add("imgMosaico");
+        imgMosaico.setAttribute("src", valor.srcImg);
+        tituloMosaicos.innerHTML = valor.descripcion;
+        
+
+        divImagenMosaico.append(imgMosaico);
+        divMosaico.append(tituloMosaicos, divImagenMosaico);
+        contenedorMosaicos.append(divMosaico);
+    })
+//pintarMosaicos();
