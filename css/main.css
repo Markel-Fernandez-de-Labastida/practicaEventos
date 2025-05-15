@@ -5,3 +5,14 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
+
+.imgHeader{
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.imgHeader img{
+   width: 100%;
+   height: 100%;
+}
