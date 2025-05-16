@@ -145,34 +145,7 @@ const pintarTituloMosaicos = () => {
     titulo.innerHTML = "Imagenes relacionadas";
 }
 
-/* const pintarMosaicos = () => {
-    arrViajes.forEach((valor, index, array) => {
-        if (index = 0) {
-
-        } else {
-            const contenedorMosaicos = document.querySelector("imgMiniaturas");
-            const tituloMosaicos = document.querySelector("imgMiniaturasTitulo");
-            
-            const divImagenMosaico = document.createElement("DIV");
-            const imgMosaico = document.createElement("IMG");
-
-            divImagenMosaico.classList.add("divImgMosaicos");
-            imgMosaico.classList.add("imgMosaico");
-            imgMosaico.setAttribute("src", valor[index].srcImg);
-            tituloMosaicos.innerHTML = valor[index].titulo;
-
-            divImagenMosaico.append(imgMosaico);
-            contenedorMosaicos.append(tituloMosaicos, divImagenMosaico)
-        }
-    })
-} */
-
-
-
-pintarBotones();
-pintarImagenGrande();
-pintarTituloMosaicos();
-
+const pintarMosaicos = () => {
     arrViajes.forEach((valor, index, array) => {
         
         const contenedorMosaicos = document.querySelector(".flexImgMiniaturas");
@@ -194,4 +167,11 @@ pintarTituloMosaicos();
         divMosaico.append(tituloMosaicos, divImagenMosaico);
         contenedorMosaicos.append(divMosaico);
     })
-//pintarMosaicos();
+}
+
+
+
+pintarBotones();
+pintarImagenGrande();
+pintarTituloMosaicos();
+pintarMosaicos();
