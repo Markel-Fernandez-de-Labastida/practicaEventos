@@ -110,6 +110,33 @@ const arrViajes = [
     },
 ]
 
+
+document.addEventListener(`click`, (event) => {
+    console.log(event.target);
+    if (event.target.classList.contains(`boton`)){
+        console.log('Es un boton');
+        const tag = event.target.getAttribute(`id`);
+        pintarImagenGrandeEvento(tag);
+        pintarMosaicosEvento(tag);
+        /* createBottons(tag);
+        showImageBig(tag);
+        showElementCountMessage(); */
+
+    }/*
+    if (event.target.matches(`.boton`)){
+        console.log('Es un boton'); 
+    }
+    if (event.target.classList.contains(`hijos`)){
+        console.log(`Es un hijo`);
+    }
+    if (event.target.matches(`#ministuras > *`)){
+        console.log(`Es un hijo`);  
+    }*/
+})
+
+    
+
+
 const pintarBotones = () =>  {
     const botonesContenedorFlex = document.querySelector(".flexBotones");
 
@@ -117,12 +144,33 @@ const pintarBotones = () =>  {
         const botonesFlex = document.createElement("BUTTON");
         botonesFlex.id = arrEtiquetas[index];
         botonesFlex.classList.add("boton");
+        botonesFlex.setAttribute("data-index", "0");
         botonesFlex.innerHTML = arrEtiquetas[index];
         console.log(botonesFlex);
 
         botonesContenedorFlex.append(botonesFlex);
     })
 }
+
+const pintarImagenGrandeEvento = (tag) => {
+    const tituloImgGrande = document.querySelector(".imgGrandeTitulo");
+    const imagen = document.querySelector(".imagenGrande");
+
+    // consigues un array filtrado por tag
+    const arrFiltradoPorTag = arrViajes.filter((valor) => {
+        return valor.tags.includes(tag);
+    })
+    console.log("Array filtrado por tag: ", arrFiltradoPorTag)
+
+    //if (!arrFiltradoPorTag == ""){
+        
+    imagen.setAttribute("src", arrFiltradoPorTag[0].srcImg);
+    tituloImgGrande.innerHTML = arrFiltradoPorTag[0].titulo;
+    
+    //}
+}
+
+
 
 const pintarImagenGrande = () => {
     const divImgGrande = document.querySelector(".imgGrande");
@@ -145,7 +193,57 @@ const pintarTituloMosaicos = () => {
     titulo.innerHTML = "Imagenes relacionadas";
 }
 
+const pintarMosaicosEvento = (tag) => {
+    let i = 1;
+    // Eliminar todo para volver a crear los mosaicos necesarios
+    const contenedorMosaicos = document.querySelector(".flexImgMiniaturas");
+    const tituloMosaicos = document.querySelector(".imgMiniaturasTitulo");
+    const divMosaico = document.querySelector(".hijos");
+    const divImagenMosaico = document.querySelector(".divImgMosaicos");
+    const imgMosaico = document.querySelector(".imgMosaico");
+    contenedorMosaicos.innerHTML = "";
+    /* contenedorMosaicos.remove();
+    tituloMosaicos.remove();
+    divMosaico.remove();
+    divImagenMosaico.remove();
+    imgMosaico.remove(); */
+
+    // consigues un array filtrado por tag
+    const arrFiltradoPorTag = arrViajes.filter((valor) => {
+        return valor.tags.includes(tag);
+    })
+    console.log("Array filtrado por tag: ", arrFiltradoPorTag);
+
+
+    arrFiltradoPorTag.forEach((valor, index, array) => {
+        
+        const contenedorMosaicos = document.querySelector(".flexImgMiniaturas");
+        const tituloMosaicos = document.createElement("H3");
+        //console.log(contenedorMosaicos);
+        //console.log(tituloMosaicos);
+        const divMosaico = document.createElement("DIV");
+        const divImagenMosaico = document.createElement("DIV");
+        const imgMosaico = document.createElement("IMG");
+
+        divMosaico.id = `hijo${i}`;
+        i = i +1;
+        divMosaico.classList.add("hijos");
+        tituloMosaicos.classList.add("imgMiniaturasTitulo");
+        divImagenMosaico.classList.add("divImgMosaicos");
+        imgMosaico.classList.add("imgMosaico");
+        imgMosaico.setAttribute("src", valor.srcImg);
+        tituloMosaicos.innerHTML = valor.descripcion;
+        
+
+        divImagenMosaico.append(imgMosaico);
+        divMosaico.append(tituloMosaicos, divImagenMosaico);
+        contenedorMosaicos.append(divMosaico);
+        
+    })
+}
+
 const pintarMosaicos = () => {
+    let i = 1;
     arrViajes.forEach((valor, index, array) => {
         
         const contenedorMosaicos = document.querySelector(".flexImgMiniaturas");
@@ -156,6 +254,9 @@ const pintarMosaicos = () => {
         const divImagenMosaico = document.createElement("DIV");
         const imgMosaico = document.createElement("IMG");
 
+        divMosaico.id = `hijo${i}`;
+        i = i +1;
+        divMosaico.classList.add("hijos");
         tituloMosaicos.classList.add("imgMiniaturasTitulo");
         divImagenMosaico.classList.add("divImgMosaicos");
         imgMosaico.classList.add("imgMosaico");
