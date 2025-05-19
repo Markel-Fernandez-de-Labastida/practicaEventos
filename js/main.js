@@ -183,12 +183,10 @@ const pintarImagenGrandeEvento = (tag) => {
     })
     console.log("Array filtrado por tag: ", arrFiltradoPorTag)
 
-    //if (!arrFiltradoPorTag == ""){
-        
+    imagen.id = arrFiltradoPorTag[0].alt;
     imagen.setAttribute("src", arrFiltradoPorTag[0].srcImg);
     tituloImgGrande.innerHTML = arrFiltradoPorTag[0].titulo;
     
-    //}
 }
 
 
