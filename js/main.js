@@ -56,7 +56,7 @@ usar filter para crear un nuevo array almacenando los tag
 // https://prod.liveshare.vsengsaas.visualstudio.com/join?7CBACAD50DB79E28D11D2E38839FCCF043AB
 
 
-const arrEtiquetas = [`Mar`, `Edificio`, `Señales`, `Arena`, `Cosa`];
+let arrEtiquetas = [];
 
 const arrViajes = [
     {
@@ -110,6 +110,25 @@ const arrViajes = [
     },
 ]
 
+const recogerTags = (viajes) => {
+    let arrTags = [];
+/*     return viajes.filter((valor, index, array) => {
+        return !array.includes(valor.tags) ? valor.tags : ""; */
+    viajes.forEach((value, index, arrays) => {
+        console.log("1: ", value);
+        value.tags.forEach((value, index, array) => {
+            console.log("2: ", value);
+            if (!arrTags.includes(value)){
+                arrTags.push(value);
+            }
+        })
+    })
+    return arrTags;
+    //})
+}
+
+console.log("Array tags: ", recogerTags(arrViajes));
+
 
 document.addEventListener(`click`, (event) => {
     console.log(event.target);
@@ -138,6 +157,7 @@ document.addEventListener(`click`, (event) => {
 
 
 const pintarBotones = () =>  {
+    let fragmento = document.createDocumentFragment();
     const botonesContenedorFlex = document.querySelector(".flexBotones");
 
     arrEtiquetas.forEach((valor, index, array) => {
@@ -148,8 +168,9 @@ const pintarBotones = () =>  {
         botonesFlex.innerHTML = arrEtiquetas[index];
         console.log(botonesFlex);
 
-        botonesContenedorFlex.append(botonesFlex);
+        fragmento.append(botonesFlex);
     })
+    botonesContenedorFlex.append(fragmento);
 }
 
 const pintarImagenGrandeEvento = (tag) => {
@@ -181,6 +202,7 @@ const pintarImagenGrande = () => {
 
     contenedorImagen.classList.add("divImagen");
     imagen.classList.add("imagenGrande");
+    imagen.id = arrViajes[0].alt;
     imagen.setAttribute("src", arrViajes[0].srcImg);
     tituloImgGrande.innerHTML = arrViajes[0].titulo;
 
@@ -208,70 +230,81 @@ const pintarMosaicosEvento = (tag) => {
     divImagenMosaico.remove();
     imgMosaico.remove(); */
 
+    let fragmento = document.createDocumentFragment();
+
     // consigues un array filtrado por tag
     const arrFiltradoPorTag = arrViajes.filter((valor) => {
         return valor.tags.includes(tag);
     })
     console.log("Array filtrado por tag: ", arrFiltradoPorTag);
-
+    const imgGrande = document.querySelector(".imagenGrande");
 
     arrFiltradoPorTag.forEach((valor, index, array) => {
-        
-        const contenedorMosaicos = document.querySelector(".flexImgMiniaturas");
-        const tituloMosaicos = document.createElement("H3");
-        //console.log(contenedorMosaicos);
-        //console.log(tituloMosaicos);
-        const divMosaico = document.createElement("DIV");
-        const divImagenMosaico = document.createElement("DIV");
-        const imgMosaico = document.createElement("IMG");
+        if (valor.alt != imgGrande.id){
+            const contenedorMosaicos = document.querySelector(".flexImgMiniaturas");
+            const tituloMosaicos = document.createElement("H3");
+            //console.log(contenedorMosaicos);
+            //console.log(tituloMosaicos);
+            const divMosaico = document.createElement("DIV");
+            const divImagenMosaico = document.createElement("DIV");
+            const imgMosaico = document.createElement("IMG");
 
-        divMosaico.id = `hijo${i}`;
-        i = i +1;
-        divMosaico.classList.add("hijos");
-        tituloMosaicos.classList.add("imgMiniaturasTitulo");
-        divImagenMosaico.classList.add("divImgMosaicos");
-        imgMosaico.classList.add("imgMosaico");
-        imgMosaico.setAttribute("src", valor.srcImg);
-        tituloMosaicos.innerHTML = valor.descripcion;
-        
+            divMosaico.id = `hijo${i}`;
+            i = i +1;
+            divMosaico.classList.add("hijos");
+            tituloMosaicos.classList.add("imgMiniaturasTitulo");
+            divImagenMosaico.classList.add("divImgMosaicos");
+            imgMosaico.classList.add("imgMosaico");
+            imgMosaico.setAttribute("src", valor.srcImg);
+            tituloMosaicos.innerHTML = valor.descripcion;
+            
 
-        divImagenMosaico.append(imgMosaico);
-        divMosaico.append(tituloMosaicos, divImagenMosaico);
-        contenedorMosaicos.append(divMosaico);
-        
+            divImagenMosaico.append(imgMosaico);
+            divMosaico.append(tituloMosaicos, divImagenMosaico);
+            fragmento.append(divMosaico);
+        }
     })
+
+    contenedorMosaicos.append(fragmento);
 }
 
 const pintarMosaicos = () => {
     let i = 1;
+    const imgGrande = document.querySelector(".imagenGrande");
+    let fragmento = document.createDocumentFragment();
+    const contenedorMosaicos = document.querySelector(".flexImgMiniaturas");
+
     arrViajes.forEach((valor, index, array) => {
         
-        const contenedorMosaicos = document.querySelector(".flexImgMiniaturas");
-        const tituloMosaicos = document.createElement("H3");
-        //console.log(contenedorMosaicos);
-        //console.log(tituloMosaicos);
-        const divMosaico = document.createElement("DIV");
-        const divImagenMosaico = document.createElement("DIV");
-        const imgMosaico = document.createElement("IMG");
+        if (valor.alt != imgGrande.id) {
+            const tituloMosaicos = document.createElement("H3");
+            //console.log(contenedorMosaicos);
+            //console.log(tituloMosaicos);
+            const divMosaico = document.createElement("DIV");
+            const divImagenMosaico = document.createElement("DIV");
+            const imgMosaico = document.createElement("IMG");
 
-        divMosaico.id = `hijo${i}`;
-        i = i +1;
-        divMosaico.classList.add("hijos");
-        tituloMosaicos.classList.add("imgMiniaturasTitulo");
-        divImagenMosaico.classList.add("divImgMosaicos");
-        imgMosaico.classList.add("imgMosaico");
-        imgMosaico.setAttribute("src", valor.srcImg);
-        tituloMosaicos.innerHTML = valor.descripcion;
-        
+            divMosaico.id = `hijo${i}`;
+            i = i +1;
+            divMosaico.classList.add("hijos");
+            tituloMosaicos.classList.add("imgMiniaturasTitulo");
+            divImagenMosaico.classList.add("divImgMosaicos");
+            imgMosaico.classList.add("imgMosaico");
+            imgMosaico.setAttribute("src", valor.srcImg);
+            tituloMosaicos.innerHTML = valor.descripcion;
+            
 
-        divImagenMosaico.append(imgMosaico);
-        divMosaico.append(tituloMosaicos, divImagenMosaico);
-        contenedorMosaicos.append(divMosaico);
+            divImagenMosaico.append(imgMosaico);
+            divMosaico.append(tituloMosaicos, divImagenMosaico);
+            fragmento.append(divMosaico);
+        }
     })
+    contenedorMosaicos.append(fragmento);
+
 }
 
 
-
+arrEtiquetas = recogerTags(arrViajes);
 pintarBotones();
 pintarImagenGrande();
 pintarTituloMosaicos();
